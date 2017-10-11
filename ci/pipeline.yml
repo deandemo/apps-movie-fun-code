@@ -27,5 +27,5 @@ jobs:
   - put: deploy-movie-service
     params:
       manifest: movie-service/manifest.yml
-      path: package-output/movie-service.jar
+      path: package-output/movie-service.war
 
