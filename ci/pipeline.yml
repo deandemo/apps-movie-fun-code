@@ -1,0 +1,31 @@
+---
+resources:
+- name: movie-service
+  type: git
+  source:
+    uri: https://github.com/deandemo/apps-movie-fun-code   #<----- REPLACE ME
+    branch: spring-boot
+
+- name: deploy-movie-service
+  type: cf
+  source:
+    api: api.system.cumuluslabs.io
+    username: {{cf-user}}
+    password: {{cf-password}}
+    organization: bdean-pal    #<----- REPLACE ME
+    space: sandbox         #<----- REPLACE ME
+    skip_cert_check: true
+
+jobs:
+- name: build
+  public: true
+  plan:
+  - get: movie-service
+    trigger: true
+  - task: package
+    file: movie-service/ci/tasks/package.yml
+  - put: deploy-movie-service
+    params:
+      manifest: movie-service/manifest.yml
+      path: package-output/movie-service.jar
+
