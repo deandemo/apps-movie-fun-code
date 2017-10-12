@@ -18,3 +18,4 @@ find movie-service/target -type f -name *.war -exec cp "{}" package-output/movie
 
 echo "Done packaging"
 exit 0
+

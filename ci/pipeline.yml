@@ -28,4 +28,7 @@ jobs:
     params:
       manifest: movie-service/manifest.yml
       path: package-output/movie-service.war
+  - task: test
+    file: movie-service/ci/tasks/test.yml
+
 
